@@ -5,51 +5,50 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>기호 1번 임준서</title>
 
-  <link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"
-  />
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
   <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
 
   <style>
-    strong {
-      background-color: #fff7b0;
-      font-style: italic;
-      font-weight: bold;
-      border-radius: 5px;
-      padding: 2px 4px;
-    }
     body {
-      font-family: 'Comic Sans MS';
+      font-family: 'Comic Sans MS', sans-serif;
       font-size: 16px;
-      line-height: 1.5;
-      background:rgb(218, 243, 255);
-      margin: 30px 25px;
+      line-height: 1.6;
+      background: #e8f5ff;
+      margin: 20px;
     }
+
     h1 {
+      text-align: center;
       color: #2c3e50;
-      text-align: center;
       font-size: 2em;
-      margin-top: 50px;
+      margin: 30px 0;
     }
-    .highlight {
-      display: inline;
-      background-color: #fff7b0;
-      border-radius: 5px;
-      padding: 2px 6px;
-      box-decoration-break: clone;
-      -webkit-box-decoration-break: clone;
+
+    .top-nav {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      background: white;
+      padding: 14px 10px;
+      border-bottom: 1px solid #ddd;
+      position: sticky;
+      top: 0;
+      z-index: 999;
     }
-    @media (max-width: 480px) {
-      body {
-        font-size: 0.9em;
-      }
-    }
-    .footer {
-      text-align: center;
-      margin-top: 30px;
+
+    .top-nav a {
+      text-decoration: none;
+      color: #007acc;
       font-weight: bold;
+      font-size: 1.1em;
     }
+
+    .top-nav a:hover {
+      color: #004d99;
+    }
+
     .swiper {
       width: 100%;
       max-width: 600px;
@@ -64,12 +63,46 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      display: block;
     }
 
+    .footer {
+      text-align: center;
+      margin-top: 40px;
+      font-size: 0.95em;
+      color: #555;
+    }
+
+    @media (max-width: 768px) {
+      body {
+        font-size: 15px;
+        margin: 15px;
+      }
+
+      h1 {
+        font-size: 1.5em;
+      }
+
+      .top-nav {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .top-nav a {
+        font-size: 1em;
+      }
+    }
   </style>
 </head>
 <body>
+
+  <nav class="top-nav">
+    <a href="index.html">🏠 홈</a>
+    <a href="letter.html">💌 임준서의 편지</a>
+    <a href="stamp.html">🖋 임준서 찍기 연습</a>
+  </nav>
+
+  <h1>기호 1번 임준서의 슬라이드</h1>
+
   <div class="swiper">
     <div class="swiper-wrapper">
       <div class="swiper-slide">
@@ -86,41 +119,11 @@
       </div>
     </div>
     <div class="swiper-pagination"></div>
-</div>
-
-  <h1>전교 부회장 후보 <strong>임준서</strong>의<br>편지</h1>
-
-  <p>안녕하세요!<br>전교 부회장 후보 <strong>기호 1번 임준서</strong>입니다.</p>
-
-  <p>
-    저는 <span class="highlight">"한다면 한다!"</span>라는 마음으로 이번 선거에 나왔습니다.<br>
-    여러분의 학교생활을 <span class="highlight">더 즐겁고, 더 편하고, 더 신나는</span> 하루로 바꾸고 싶어요.
-  </p>
-
-  <p>
-    <span class="highlight">"누군가는 해야 하는 일이라면 내가 하자!"</span><br>
-    이 마음으로 여러분의 곁에서 열심히 뛰겠습니다.
-  </p>
-
-  <p>
-    여러분 한 명, 한 명의 의견이 소중하다는 걸 절대 잊지 않겠습니다.<br>
-    저 <strong>임준서</strong>는 약속합니다.<br>
-    <span class="highlight">말만 하지 않고, 행동으로 보여드리는 부회장</span>이 되겠습니다.
-  </p>
-
-  <p>
-    여러분의 소중한 한 표,<br>
-    저에게 주신다면 절대 후회하지 않도록!<br>
-    <span class="highlight">정직하고, 당당하게! 최선을 다하겠습니다!</span>
-  </p>
-
-    <p>감사합니다.</p>
-
-  <div class="footer">임준서 드림</div>
+  </div>
 
   <div class="footer">
-  <p><br>&copy; 임준서 2025. All rights reserved.</p>
-  <p>이 사이트는 100% 임준서 후보자가 직접 제작하였습니다.</p>
+    <p><br>&copy; 임준서 2025. All rights reserved.</p>
+    <p>이 사이트는 100% 임준서 후보자가 직접 제작하였습니다.</p>
   </div>
 
   <script>
