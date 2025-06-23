@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>부회장은 누구?</title>
+<style>
+  body {
+    font-family: 'Comic Sans MS', sans-serif;
+    background: #e8f5ff;
+    text-align: center;
+    margin: 0; padding: 30px;
+    user-select: none;
+  }
+  nav {
+    background: white;
+    padding: 14px 10px;
+    border-bottom: 1px solid #ddd;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+  nav a {
+    color: #007acc;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.1em;
+  }
+  nav a:hover {
+    color: #004d99;
+  }
+  h1 {
+    font-size: 2em;
+    margin-bottom: 30px;
+    color: #2c3e50;
+  }
+  .characters {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+  }
+  .char {
+    font-size: 50px;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 10px;
+    background: white;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    user-select: none;
+    transition: transform 0.3s ease;
+  }
+  .char:hover {
+    background-color: #d6ecff;
+    transform: scale(1.2);
+  }
+  .ladder-container {
+    position: relative;
+    margin: 0 auto 30px;
+    width: 440px;
+    height: 320px;
+    background: #f0f9ff;
+    border-radius: 10px;
+    border: 3px solid #007acc;
+    box-shadow: inset 0 0 10px #a6d0ff;
+    display: none;
+  }
+  .line {
+    position: absolute;
+    top: 0; bottom: 0;
+    width: 8px;
+    background-color: #004d99;
+    border-radius: 4px;
+    box-shadow: 0 0 8px #0066cc;
+  }
+  .line:nth-child(1) { left: 20px; }
+  .line:nth-child(2) { left: 74px; }
+  .line:nth-child(3) { left: 128px; }
+  .line:nth-child(4) { left: 182px; }
+  .line:nth-child(5) { left: 236px; }
+  .line:nth-child(6) { left: 290px; }
+  .line:nth-child(7) { left: 344px; }
+  .line:nth-child(8) { left: 398px; }
+  .bridge {
+    position: absolute;
+    height: 10px;
+    background-color: #3399ff;
+    border-radius: 5px;
+    box-shadow: 0 0 6px #66b3ff;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+  }
+  .bridge.active {
+    background-color: #ff9933;
+    box-shadow: 0 0 12px #ff9933;
+  }
+  .marker {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    background: radial-gradient(circle at center, #d35400 40%, #a33700 100%);
+    border-radius: 50%;
+    box-shadow: 0 0 8px #d35400, 0 0 15px #ff5500;
+    top: 0;
+    left: 0;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    display: none;
+  }
+  .result {
+    font-size: 1.7em;
+    color: #d35400;
+    min-height: 50px;
+    font-weight: 700;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+    user-select: text;
+  }
+  .choices {
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 15px;
+    font-size: 1.1em;
+    color: #2c3e50;
+  }
+  .choice-item {
+    flex: 1 1 120px;
+    background: white;
+    border-radius: 8px;
+    padding: 10px 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    user-select: none;
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html">🏠 홈</a>
+  <a href="LETTER.html">💌 임준서의 편지</a>
+  <a href="CHOOSE.html">🖋 부회장은 누구?</a>
+</nav>
+
+<h1>부회장은 누구?</h1>
+
+<div class="characters" id="characters">
+  <div class="char" data-index="0">🐱</div>
+  <div class="char" data-index="1">🐰</div>
+  <div class="char" data-index="2">🐶</div>
+  <div class="char" data-index="3">🦊</div>
+  <div class="char" data-index="4">🐼</div>
+  <div class="char" data-index="5">🐵</div>
+  <div class="char" data-index="6">🐧</div>
+  <div class="char" data-index="7">🐨</div>
+</div>
+
+<div class="ladder-container" id="ladder">
+  <div class="line"></div>
+  <div class="line"></div>
+  <div class="line"></div>
+  <div class="line"></div>
+  <div class="line"></div>
+  <div class="line"></div>
+  <div class="line"></div>
+  <div class="line"></div>
+  <div class="marker" id="marker"></div>
+</div>
+
+<div class="result" id="result"></div>
+
+<div class="choices">
+  <div class="choice-item">기호 1번 임준서</div>
+  <div class="choice-item">기호 2번</div>
+  <div class="choice-item">기호 3번</div>
+  <div class="choice-item">기호 4번</div>
+  <div class="choice-item">기호 5번</div>
+  <div class="choice-item">기호 6번</div>
+  <div class="choice-item">기호 7번</div>
+  <div class="choice-item">기호 8번</div>
+</div>
+
+<script>
+  const ladder = document.getElementById('ladder');
+  const result = document.getElementById('result');
+  const chars = document.querySelectorAll('.char');
+  const marker = document.getElementById('marker');
+  const numLines = 8;
+  const ladderHeight = 320;
+  const linePositions = [20,74,128,182,236,290,344,398];
+  let bridges = [];
+
+  function generateBridges() {
+    bridges = [];
+    const count = 12; // 사다리 가로선 개수 고정
+    let usedHeights = [];
+    for(let i=0; i<count; i++) {
+      let line = Math.floor(Math.random()*(numLines-1));
+      let top;
+      do {
+        top = Math.floor(Math.random()*(ladderHeight-60)) + 30;
+      } while (usedHeights.some(h => Math.abs(h-top)<30));
+      usedHeights.push(top);
+      bridges.push({line, top});
+    }
+    bridges.sort((a,b) => a.top - b.top);
+  }
+
+  function drawBridges() {
+    ladder.querySelectorAll('.bridge').forEach(b => b.remove());
+    bridges.forEach(b => {
+      const div = document.createElement('div');
+      div.className = 'bridge';
+      div.style.left = linePositions[b.line] + 'px';
+      div.style.top = b.top + 'px';
+      div.style.width = (linePositions[b.line+1] - linePositions[b.line]) + 'px';
+      ladder.appendChild(div);
+    });
+  }
+
+  async function climbLadder(startIndex) {
+    marker.style.display = 'block';
+    let curLine = startIndex;
+    let curTop = 0;
+    function moveMarker(left, top) {
+      marker.style.left = left + 'px';
+      marker.style.top = top + 'px';
+    }
+    moveMarker(linePositions[curLine], curTop);
+
+    function delay(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+    for (const b of bridges) {
+      if (b.top > curTop && (b.line === curLine || b.line === curLine - 1)) {
+        while (curTop < b.top) {
+          curTop += 10;
+          if (curTop > b.top) curTop = b.top;
+          moveMarker(linePositions[curLine], curTop);
+          await delay(20);
+        }
+        const bridgeDivs = ladder.querySelectorAll('.bridge');
+        bridgeDivs.forEach(div => {
+          const leftPx = parseInt(div.style.left);
+          const topPx = parseInt(div.style.top);
+          if (topPx === b.top && leftPx === linePositions[b.line]) {
+            div.classList.add('active');
+          } else {
+            div.classList.remove('active');
+          }
+        });
+        if (b.line === curLine) {
+          const dist = linePositions[curLine+1] - linePositions[curLine];
+          for(let i=0; i<=dist; i+=12) {
+            moveMarker(linePositions[curLine] + i, curTop);
+            await delay(15);
+          }
+          curLine++;
+        } else {
+          const dist = linePositions[curLine] - linePositions[curLine-1];
+          for(let i=0; i<=dist; i+=12) {
+            moveMarker(linePositions[curLine] - i, curTop);
+            await delay(15);
+          }
+          curLine--;
+        }
+        bridgeDivs.forEach(div => div.classList.remove('active'));
+      }
+    }
+
+    while(curTop < ladderHeight) {
+      curTop += 10;
+      if (curTop > ladderHeight) curTop = ladderHeight;
+      moveMarker(linePositions[curLine], curTop);
+      await delay(20);
+    }
+
+    marker.style.display = 'none';
+
+    const names = [
+      '기호 1번 임준서',
+      '기호 2번',
+      '기호 3번',
+      '기호 4번',
+      '기호 5번',
+      '기호 6번',
+      '기호 7번',
+      '기호 8번'
+    ];
+    result.textContent = names[curLine];
+  }
+
+  generateBridges();
+  drawBridges();
+  ladder.style.display = 'block';
+
+  chars.forEach(c => {
+    c.addEventListener('click', () => {
+      result.textContent = '';
+      climbLadder(+c.dataset.index);
+    });
+  });
+</script>
+
+</body>
+</html>
